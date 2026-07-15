@@ -13,10 +13,30 @@ return new class extends Migration
     {
         Schema::create('users', function (Blueprint $table) {
             $table->id();
+            $table->string('username')->nullable()->unique();
             $table->string('name');
             $table->string('email')->unique();
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
+            $table->string('role')->default('student');
+            $table->string('full_name')->nullable();
+            $table->string('avatar')->nullable();
+            $table->string('city')->nullable();
+            $table->string('classes')->nullable();
+            $table->text('bio')->nullable();
+            $table->string('subjects')->nullable();
+            $table->string('phone')->nullable();
+            $table->string('province')->nullable();
+            $table->string('district')->nullable();
+            $table->string('subdistrict')->nullable();
+            $table->string('village')->nullable();
+            $table->string('gender')->nullable();
+            $table->string('interests')->nullable();
+            $table->string('school_name')->nullable();
+            $table->string('school_history')->nullable();
+            $table->boolean('is_active')->default(true);
+            $table->boolean('is_suspended')->default(false);
+            $table->integer('last_grade_update_year')->nullable();
             $table->rememberToken();
             $table->timestamps();
         });

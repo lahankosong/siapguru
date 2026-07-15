@@ -423,19 +423,19 @@ Ketika jumlah pengguna sudah mulai bertambah, Anda baru bisa menambahkan payment
 
 #### Phase 1: Foundation (Laravel + Core Features)
 - [x] Setup Laravel 12 project (bigenzi-laravel)
-- [x] Database migration (9 migration files created)
-- [ ] Authentication system (Breeze) - pending install
+- [x] Database migration (9 migration files migrated)
+- [x] Authentication system (Breeze)
 - [x] Role-based middleware (admin, tutor, student, parent)
 - [ ] User profile management
 - [x] Basic article system (model + controller)
 ```
 
 #### Phase 2: Marketplace Core
-- [ ] Tutor discovery & search
-- [ ] Tutor profile marketplace
-- [ ] Booking system (basic)
-- [ ] Calendar integration
-- [ ] Chat system (real-time)
+- [x] Tutor discovery & search
+- [x] Tutor profile marketplace
+- [x] Booking system (basic)
+- [x] Calendar integration
+- [x] Chat system (real-time)
 
 #### Phase 3: Advanced Features
 - [ ] Payment integration (midtrans, duitku)

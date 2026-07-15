@@ -1,15 +1,19 @@
 <?php
 
+use App\Http\Controllers\ArticleController;
+use App\Http\Controllers\BookingController;
+use App\Http\Controllers\ChatController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\TutorController;
 use Illuminate\Support\Facades\Route;
 
 // Public Routes
 Route::get('/', [HomeController::class, 'index'])->name('home');
-Route::get('/articles', [HomeController::class, 'articles'])->name('articles.index');
-Route::get('/articles/{article}', [HomeController::class, 'articleDetail'])->name('articles.show');
-Route::get('/tutors', [HomeController::class, 'tutors'])->name('tutors.index');
-Route::get('/tutors/{tutor}', [HomeController::class, 'tutorDetail'])->name('tutors.show');
+Route::get('/articles', [ArticleController::class, 'index'])->name('articles.index');
+Route::get('/articles/{article}', [ArticleController::class, 'show'])->name('articles.show');
+Route::get('/tutors', [TutorController::class, 'index'])->name('tutors.index');
+Route::get('/tutors/{tutor}', [TutorController::class, 'show'])->name('tutors.show');
 Route::get('/about', [HomeController::class, 'about'])->name('about');
 Route::get('/contact', [HomeController::class, 'contact'])->name('contact');
 
@@ -42,6 +46,25 @@ Route::middleware(['auth', 'role:student,parent'])->group(function () {
     Route::get('/student/dashboard', function () {
         return view('student.dashboard');
     })->name('student.dashboard');
+});
+
+// Booking Routes
+Route::middleware('auth')->group(function () {
+    Route::get('/bookings', [BookingController::class, 'index'])->name('bookings.index');
+    Route::get('/tutors/{tutor}/book', [BookingController::class, 'create'])->name('bookings.create');
+    Route::post('/tutors/{tutor}/book', [BookingController::class, 'store'])->name('bookings.store');
+    Route::get('/bookings/{booking}', [BookingController::class, 'show'])->name('bookings.show');
+    Route::patch('/bookings/{booking}/confirm', [BookingController::class, 'confirm'])->name('bookings.confirm');
+    Route::patch('/bookings/{booking}/cancel', [BookingController::class, 'cancel'])->name('bookings.cancel');
+    Route::patch('/bookings/{booking}/complete', [BookingController::class, 'complete'])->name('bookings.complete');
+});
+
+// Chat Routes
+Route::middleware('auth')->group(function () {
+    Route::get('/chat', [ChatController::class, 'index'])->name('chat.index');
+    Route::get('/chat/{chat}', [ChatController::class, 'show'])->name('chat.show');
+    Route::get('/tutors/{tutor}/chat', [ChatController::class, 'create'])->name('chat.create');
+    Route::post('/chat/{chat}/message', [ChatController::class, 'store'])->name('chat.message');
 });
 
 // Auth Routes (Breeze)

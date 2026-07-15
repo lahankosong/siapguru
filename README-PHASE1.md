@@ -4,8 +4,8 @@
 
 ### Phase 1: Foundation (Laravel + Core Features)
 - [x] Setup Laravel 12 project (bigenzi-laravel)
-- [x] Database migration (9 migration files created)
-- [ ] Authentication system (Breeze) - pending install
+- [x] Database migration (9 migration files created & migrated)
+- [x] Authentication system (Breeze)
 - [x] Role-based middleware (admin, tutor, student, parent)
 - [ ] User profile management
 - [x] Basic article system (model + controller)
