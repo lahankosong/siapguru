@@ -40,6 +40,12 @@ Route::middleware(['auth', 'role:tutor,author'])->group(function () {
     Route::get('/tutor/dashboard', function () {
         return view('tutor.dashboard');
     })->name('tutor.dashboard');
+    
+    // Tutor Profile Management
+    Route::get('/tutor/profile', [\App\Http\Controllers\Tutor\ProfileController::class, 'edit'])->name('tutor.profile.edit');
+    Route::post('/tutor/profile', [\App\Http\Controllers\Tutor\ProfileController::class, 'update'])->name('tutor.profile.update');
+    Route::post('/tutor/availability', [\App\Http\Controllers\Tutor\ProfileController::class, 'updateAvailability'])->name('tutor.availability.update');
+    Route::delete('/tutor/availability/{availability}', [\App\Http\Controllers\Tutor\ProfileController::class, 'deleteAvailability'])->name('tutor.availability.delete');
 });
 
 Route::middleware(['auth', 'role:student,parent'])->group(function () {

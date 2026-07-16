@@ -426,7 +426,7 @@ Ketika jumlah pengguna sudah mulai bertambah, Anda baru bisa menambahkan payment
 - [x] Database migration (9 migration files migrated)
 - [x] Authentication system (Breeze)
 - [x] Role-based middleware (admin, tutor, student, parent)
-- [ ] User profile management
+- [x] User profile management
 - [x] Basic article system (model + controller)
 ```
 

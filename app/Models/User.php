@@ -93,4 +93,19 @@ class User extends Model
     {
         return $this->belongsToMany(User::class, 'tutor_follows', 'tutor_id', 'student_id');
     }
+
+    public function availabilities(): \Illuminate\Database\Eloquent\Relations\HasMany
+    {
+        return $this->hasMany(Availability::class, 'tutor_id');
+    }
+
+    public function bookingsAsStudent(): \Illuminate\Database\Eloquent\Relations\HasMany
+    {
+        return $this->hasMany(Booking::class, 'student_id');
+    }
+
+    public function bookingsAsTutor(): \Illuminate\Database\Eloquent\Relations\HasMany
+    {
+        return $this->hasMany(Booking::class, 'tutor_id');
+    }
 }
