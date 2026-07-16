@@ -16,6 +16,19 @@
             <x-input-error :messages="$errors->get('email')" class="mt-2" />
         </div>
 
+        <!-- Role Selection -->
+        <div class="mt-4">
+            <x-input-label for="role" :value="__('I am registering as')" />
+            <select id="role" name="role" class="block mt-1 w-full border-gray-300 rounded-md shadow-sm focus:border-indigo-500 focus:ring-indigo-500" required>
+                <option value="">-- Pilih Role --</option>
+                <option value="student" {{ old('role') === 'student' ? 'selected' : '' }}>Siswa</option>
+                <option value="parent" {{ old('role') === 'parent' ? 'selected' : '' }}>Orang Tua</option>
+                <option value="tutor" {{ old('role') === 'tutor' ? 'selected' : '' }}>Guru Privat</option>
+                <option value="author" {{ old('role') === 'author' ? 'selected' : '' }}>Penulis Artikel</option>
+            </select>
+            <x-input-error :messages="$errors->get('role')" class="mt-2" />
+        </div>
+
         <!-- Password -->
         <div class="mt-4">
             <x-input-label for="password" :value="__('Password')" />
