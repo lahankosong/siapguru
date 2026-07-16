@@ -8,17 +8,28 @@ use Illuminate\Http\Request;
 
 class HomeController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
         $articles = Article::approved()->latest()->take(6)->get();
-        $featuredTutors = User::where('role', 'tutor')
+        
+        // Get tutors with search/filter for marketplace display
+        $tutors = User::where('role', 'tutor')
             ->where('is_active', true)
-            ->where('is_suspended', false)
-            ->latest()
-            ->take(6)
-            ->get();
+            ->where('is_suspended', false);
 
-        return view('home.index', compact('articles', 'featuredTutors'));
+        // Filter by Subject
+        if ($request->filled('subject')) {
+            $tutors->where('subjects', 'like', '%' . $request->subject . '%');
+        }
+
+        // Filter by City
+        if ($request->filled('city')) {
+            $tutors->where('city', 'like', '%' . $request->city . '%');
+        }
+
+        $tutors = $tutors->with('privateTutor')->latest()->get();
+
+        return view('home.index', compact('articles', 'tutors'));
     }
 
     public function articles()
