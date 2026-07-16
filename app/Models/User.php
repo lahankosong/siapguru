@@ -108,4 +108,19 @@ class User extends Model
     {
         return $this->hasMany(Booking::class, 'tutor_id');
     }
+
+    public function courses(): \Illuminate\Database\Eloquent\Relations\HasMany
+    {
+        return $this->hasMany(Course::class, 'tutor_id');
+    }
+
+    public function progressAsTutor(): \Illuminate\Database\Eloquent\Relations\HasMany
+    {
+        return $this->hasMany(Progress::class, 'tutor_id');
+    }
+
+    public function progressAsStudent(): \Illuminate\Database\Eloquent\Relations\HasMany
+    {
+        return $this->hasMany(Progress::class, 'student_id');
+    }
 }

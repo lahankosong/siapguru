@@ -3,7 +3,9 @@
 use App\Http\Controllers\ArticleController;
 use App\Http\Controllers\BookingController;
 use App\Http\Controllers\ChatController;
+use App\Http\Controllers\CourseController;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\PaymentController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\TutorController;
 use Illuminate\Support\Facades\Route;
@@ -14,6 +16,8 @@ Route::get('/articles', [ArticleController::class, 'index'])->name('articles.ind
 Route::get('/articles/{article}', [ArticleController::class, 'show'])->name('articles.show');
 Route::get('/tutors', [TutorController::class, 'index'])->name('tutors.index');
 Route::get('/tutors/{tutor}', [TutorController::class, 'show'])->name('tutors.show');
+Route::get('/courses', [CourseController::class, 'index'])->name('courses.index');
+Route::get('/courses/{course}', [CourseController::class, 'show'])->name('courses.show');
 Route::get('/about', [HomeController::class, 'about'])->name('about');
 Route::get('/contact', [HomeController::class, 'contact'])->name('contact');
 
@@ -46,6 +50,16 @@ Route::middleware(['auth', 'role:tutor,author'])->group(function () {
     Route::post('/tutor/profile', [\App\Http\Controllers\Tutor\ProfileController::class, 'update'])->name('tutor.profile.update');
     Route::post('/tutor/availability', [\App\Http\Controllers\Tutor\ProfileController::class, 'updateAvailability'])->name('tutor.availability.update');
     Route::delete('/tutor/availability/{availability}', [\App\Http\Controllers\Tutor\ProfileController::class, 'deleteAvailability'])->name('tutor.availability.delete');
+    
+    // Tutor Courses
+    Route::get('/tutor/courses', [CourseController::class, 'tutorCourses'])->name('tutor.courses.index');
+    Route::get('/tutor/courses/create', [CourseController::class, 'create'])->name('tutor.courses.create');
+    Route::post('/tutor/courses', [CourseController::class, 'store'])->name('tutor.courses.store');
+    
+    // Video Meeting
+    Route::get('/bookings/{booking}/meeting', function (\App\Models\Booking $booking) {
+        return view('tutor.meeting', compact('booking'));
+    })->name('booking.meeting');
 });
 
 Route::middleware(['auth', 'role:student,parent'])->group(function () {
@@ -63,6 +77,11 @@ Route::middleware('auth')->group(function () {
     Route::patch('/bookings/{booking}/confirm', [BookingController::class, 'confirm'])->name('bookings.confirm');
     Route::patch('/bookings/{booking}/cancel', [BookingController::class, 'cancel'])->name('bookings.cancel');
     Route::patch('/bookings/{booking}/complete', [BookingController::class, 'complete'])->name('bookings.complete');
+    
+    // Payment Routes
+    Route::get('/bookings/{booking}/payment', [PaymentController::class, 'create'])->name('payment.create');
+    Route::post('/bookings/{booking}/payment', [PaymentController::class, 'store'])->name('payment.store');
+    Route::get('/bookings/{booking}/payment/instructions', [PaymentController::class, 'instructions'])->name('payment.instructions');
 });
 
 // Chat Routes
