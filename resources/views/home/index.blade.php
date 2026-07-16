@@ -14,11 +14,24 @@
             <a href="/" class="text-2xl font-bold text-blue-600">
                 <i class="fas fa-graduation-cap mr-2"></i>Bigenzi
             </a>
-            <div class="flex space-x-4">
+            <div class="flex space-x-4 items-center">
                 <a href="/articles" class="text-gray-700 hover:text-blue-600">Materi</a>
                 <a href="/tutors" class="text-gray-700 hover:text-blue-600">Guru Privat</a>
                 <a href="/about" class="text-gray-700 hover:text-blue-600">Tentang</a>
                 <a href="/contact" class="text-gray-700 hover:text-blue-600">Kontak</a>
+                
+                @if(auth()->check())
+                    <a href="/dashboard" class="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700">
+                        <i class="fas fa-tachometer-alt mr-1"></i>Dashboard
+                    </a>
+                @else
+                    <div class="flex space-x-2">
+                        <a href="/login" class="text-gray-700 hover:text-blue-600 px-3 py-1">Masuk</a>
+                        <a href="/register" class="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700">
+                            Daftar
+                        </a>
+                    </div>
+                @endif
             </div>
         </div>
     </nav>
@@ -52,9 +65,9 @@
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
                 @forelse($featuredTutors as $tutor)
                 <div class="bg-white rounded-lg shadow-md p-6 text-center">
-                    <img src="{{ $tutor->avatar ? '/uploads/avatars/' . $tutor->avatar : 'https://via.placeholder.com/100' }}" 
+                    <img src="{{ $tutor->avatar ? '/storage/' . $tutor->avatar : 'https://via.placeholder.com/100' }}" 
                          alt="{{ $tutor->full_name }}" class="w-20 h-20 rounded-full mx-auto mb-4">
-                    <h3 class="font-bold text-lg">{{ $tutor->full_name }}</h3>
+                    <h3 class="font-bold text-lg">{{ $tutor->full_name ?? $tutor->name }}</h3>
                     <p class="text-gray-600 text-sm">{{ $tutor->subjects }}</p>
                     <div class="flex justify-center items-center mt-2">
                         <span class="text-yellow-500">
