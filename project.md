@@ -438,10 +438,10 @@ Ketika jumlah pengguna sudah mulai bertambah, Anda baru bisa menambahkan payment
 - [x] Chat system (real-time)
 
 #### Phase 3: Advanced Features
-- [ ] Payment integration (midtrans, duitku)
-- [ ] Video meeting (Jitsi API)
-- [ ] Progress tracking
-- [ ] Course marketplace
+- [x] Payment integration (midtrans, duitku)
+- [x] Video meeting (Jitsi API)
+- [x] Progress tracking
+- [x] Course marketplace
 - [ ] Community features
 
 #### Phase 4: AI & Scaling
